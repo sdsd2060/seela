@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>احجز الآن - استكشف شيلا</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Specific styles for booking page (Keep existing styles or add new ones if needed) */
+        .booking-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x400?text=Booking+Page+Header') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 0;
+        }
+        .booking-hero h1 {
+            color: var(--white);
+            font-size: 3.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .booking-section {
+            background-color: var(--white);
+            padding: 60px 0;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            transform: translateY(-40px);
+            position: relative;
+            z-index: 1;
+        }
+        .booking-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: right;
+        }
+        .booking-form h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1em;
+            background-color: var(--white);
+            color: var(--text-color);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group input[type="radio"],
+        .form-group input[type="checkbox"] {
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .form-group .radio-group label,
+        .form-group .checkbox-group label {
+            display: inline-block;
+            margin-left: 15px;
+            font-weight: normal;
+        }
+        .form-group .radio-group,
+        .form-group .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .terms-checkbox {
+            margin-top: 30px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+        .terms-checkbox input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        .terms-checkbox label {
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .terms-checkbox label a {
+            color: var(--primary-color);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        .terms-checkbox label a:hover {
+            color: var(--secondary-color);
+        }
+
+        .invoice-summary {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+            text-align: right;
+            font-size: 1.1em;
+        }
+        .invoice-summary h3 {
+            color: var(--secondary-color);
+            text-align: right;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .invoice-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        .invoice-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .invoice-total {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--accent-color);
+        }
+        .invoice-discount {
+            color: #dc3545;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+
+        .payment-info {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+        .payment-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .payment-methods p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        .payment-methods span {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        .payment-methods ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        .payment-methods ul li {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        .payment-methods ul li i {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-left: 15px;
+        }
+        .payment-methods ul li strong {
+            color: var(--primary-color);
+        }
+
+        .booking-submit-btn {
+            width: auto;
+            display: block;
+            margin: 30px auto 0;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        .booking-submit-btn:hover {
+            background-color: #218838;
+        }
+        .booking-submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Styles for dynamic participant fields */
+        .participant-fields {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: var(--white);
+        }
+        .participant-fields h3 {
+            text-align: right;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .input-error {
+            border-color: red !important;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+        .age-warning-message {
+            color: orange;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+        /* Responsive adjustments for booking page */
+        @media (max-width: 768px) {
+            .booking-hero h1 {
+                font-size: 2.5em;
+            }
+            .booking-form {
+                padding: 20px;
+            }
+            .terms-checkbox {
+                flex-direction: column;
+                align-items: flex-end;
+            }
+            .terms-checkbox input[type="checkbox"] {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <img src="https://via.placeholder.com/100x50?text=Istanova" alt="شعار Istanova">
+                </div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html#hero">الرئيسية</a></li>
+                    <li><a href="index.html#about">عن المخيم</a></li>
+                    <li><a href="index.html#program">البرنامج</a></li>
+                    <li><a href="index.html#included">المخيم الشامل</a></li>
+                    <li><a href="index.html#why-join">لماذا تنضم؟</a></li>
+                    <li><a href="index.html#offers">عروض وخصومات</a></li>
+                    <li><a href="index.html#terms">الشروط والأحكام</a></li>
+                    <li><a href="index.html#what-to-bring">ماذا تحضر؟</a></li>
+                    <li><a href="index.html#contact">تواصل معنا</a></li>
+                    <li><a href="booking.html" class="nav-btn">احجز الآن</a></li>
+                </ul>
+                <div class="burger" id="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="booking-hero">
+            <div class="hero-content">
+                <h1>احجز مقعدك في مغامرة شيلا!</h1>
+            </div>
+        </section>
+
+        <section class="booking-section container">
+            <h2>نموذج الحجز والدفع</h2>
+            <p class="section-description">يرجى ملء المعلومات التالية لتأكيد حجزك في مخيم "استكشف شيلا".</p>
+
+            <div class="booking-form">
+                <form id="bookingForm" action="http://localhost:3000/submit-booking" method="POST">
+                    <h3>معلومات الحجز الشخصية</h3>
+                    <div class="form-group">
+                        <label for="fullName">الاسم الكامل (المتقدم للحجز):</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف (مع رمز الدولة):</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+90 5XX XXXXXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numParticipants">عدد المشاركين (شاملًا لك):</label>
+                        <input type="number" id="numParticipants" name="numParticipants" value="1" min="1" required>
+                    </div>
+
+                    <div id="additionalParticipantsInfo">
+                        </div>
+
+                    <div class="form-group">
+                        <label for="arrivalDate">تاريخ بدء المخيم:</label>
+                        <input type="text" id="arrivalDate" name="arrivalDate" value="15/07/2025" readonly>
+                        <small>هذا هو التاريخ الثابت لبدء المخيم.</small>
+                    </div>
+                     <div class="form-group">
+                        <label for="notes">ملاحظات أو متطلبات خاصة (حساسية، نظام غذائي، إلخ):</label>
+                        <textarea id="notes" name="notes"></textarea>
+                    </div>
+
+                    <div class="invoice-summary">
+                        <h3>ملخص الفاتورة</h3>
+                        <div class="invoice-item">
+                            <span>سعر الشخص الواحد:</span>
+                            <span id="pricePerPersonDisplay"></span>
+                        </div>
+                        <div class="invoice-item">
+                            <span>عدد المشاركين:</span>
+                            <span id="participantsCountDisplay"></span>
+                        </div>
+                        <div class="invoice-discount" id="groupDiscountRow" style="display: none;">
+                            <span>خصم المجموعات (15%):</span>
+                            <span id="groupDiscountAmount"></span>
+                        </div>
+                        <div class="invoice-discount" id="friendDiscountRow" style="display: none;">
+                            <span>خصم الأصدقاء (10%):</span>
+                            <span id="friendDiscountAmount"></span>
+                        </div>
+                        <div class="invoice-total">
+                            <span>المبلغ الإجمالي المطلوب:</span>
+                            <span id="totalAmountDisplay"></span>
+                        </div>
+                         <p style="text-align: center; font-size: 0.9em; color: var(--secondary-color); margin-top: 15px;">خصم خاص للمجموعات (3 أشخاص فأكثر) أو خصم الأصدقاء (شخصان).</p>
+                    </div>
+
+                    <div class="payment-info">
+                        <h3>معلومات الدفع</h3>
+                        <p>لتأكيد حجزك، يرجى إتمام عملية الدفع.</p>
+                        <p>نحن نوفر خيارات الدفع التالية:</p>
+                        <div class="payment-methods">
+                            <ul>
+                                <li>
+                                    <i class="fas fa-bank"></i>
+                                    <div>
+                                        <strong>التحويل البنكي:</strong>
+                                        <p>اسم البنك: [اسم البنك]<br>
+                                        اسم الحساب: Istanova Tourism<br>
+                                        رقم الحساب (IBAN): TRXX XXXX XXXX XXXX XXXX XXXX XX <br>
+                                        رمز السويفت (SWIFT/BIC): [رمز السويفت]</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fab fa-paypal"></i>
+                                    <div>
+                                        <strong>الدفع عبر PayPal:</strong>
+                                        <p>يمكنك الدفع مباشرة عبر حسابنا على PayPal: <a href="mailto:info@istanova.com">info@istanova.com</a> (يرجى إضافة رسوم خدمة PayPal إن وجدت).</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <div>
+                                        <strong>الدفع نقدًا (للمقيمين في إسطنبول):</strong>
+                                        <p>يمكن ترتيب الدفع نقدًا في مكتبنا بـ **Istanbul Fatih, Yusufpaşa Tramvay Karşısı** بعد التواصل المسبق.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p>**ملاحظة هامة:** يرجى إرسال **صورة أو إثبات لعملية الدفع** إلى بريدنا الإلكتروني (`info@istanova.com`) مع ذكر اسمك الكامل ورقم هاتفك لتأكيد حجزك بشكل نهائي.</p>
+                        </div>
+                    </div>
+
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                        <label for="agreeTerms">
+                            أوافق على <a href="index.html#terms" target="_blank">الشروط والأحكام</a> الخاصة بالمخيم.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="booking-submit-btn" id="submitBookingBtn" disabled>تأكيد الحجز والدفع</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Istanova. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/905457307235" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            burger.classList.toggle('toggle');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('nav-active')) {
+                    navLinks.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                }
+            });
+        });
+
+        // Booking Form Logic
+        const CAMP_DATE = new Date('2025-07-15T00:00:00');
+        const LAST_REG_DATE = new Date('2025-07-10T23:59:59');
+
+        const pricePerPersonBase = 450;
+        const groupDiscountRate = 0.15;
+        const friendDiscountRate = 0.10;
+        const currency = "USD";
+
+        const numParticipantsInput = document.getElementById('numParticipants');
+        const pricePerPersonDisplay = document.getElementById('pricePerPersonDisplay');
+        const participantsCountDisplay = document.getElementById('participantsCountDisplay');
+        const groupDiscountRow = document.getElementById('groupDiscountRow');
+        const groupDiscountAmount = document.getElementById('groupDiscountAmount');
+        const friendDiscountRow = document.getElementById('friendDiscountRow');
+        const friendDiscountAmount = document.getElementById('friendDiscountAmount');
+        const totalAmountDisplay = document.getElementById('totalAmountDisplay');
+        const agreeTermsCheckbox = document.getElementById('agreeTerms');
+        const submitBookingBtn = document.getElementById('submitBookingBtn');
+        const additionalParticipantsInfo = document.getElementById('additionalParticipantsInfo');
+        const bookingForm = document.getElementById('bookingForm');
+
+        const nationalities = [
+            "أفغانستان", "ألبانيا", "الجزائر", "أندورا", "أنغولا", "أنتيغوا وباربودا", "الأرجنتين", "أرمينيا", "أستراليا", "النمسا", "أذربيجان",
+            "جزر البهاما", "البحرين", "بنغلاديش", "باربادوس", "بيلاروسيا", "بلجيكا", "بليز", "بنين", "بوتان", "بوليفيا", "البوسنة والهرسك", "بوتسوانا", "البرازيل", "بروناي", "بلغاريا", "بوركينا فاسو", "بوروندي",
+            "الرأس الأخضر", "كمبوديا", "الكاميرون", "كندا", "جمهورية أفريقيا الوسطى", "تشاد", "تشيلي", "الصين", "كولومبيا", "جزر القمر", "كونغو (جمهورية - الديمقراطية)", "كوستاريكا", "كرواتيا", "كوبا", "قبرص", "الجمهورية التشيكية",
+            "الدنمارك", "جيبوتي", "دومينيكا", "جمهورية الدومينيكان", "الإكوادور", "مصر", "السلفادور", "غينيا الاستوائية", "إريتريا", "إستونيا", "إثيوبيا",
+            "فيجي", "فنلندا", "فرنسا",
+            "الغابون", "غامبيا", "جورجيا", "ألمانيا", "غانا", "اليونان", "غرينادا", "غواتيمالا", "غينيا", "غينيا بيساو", "غيانا",
+            "هايتي", "هندوراس", "المجر",
+            "أيسلندا", "الهند", "إندونيسيا", "إيران", "العراق", "أيرلندا", "إسرائيل", "إيطاليا", "ساحل العاج",
+            "جامايكا", "اليابان", "الأردن",
+            "كازاخستان", "كينيا", "كيريباتي", "كوريا الشمالية", "كوريا الجنوبية", "كوسوفو", "الكويت", "قرغيزستان",
+            "لاوس", "لاتفيا", "لبنان", "ليسوتو", "ليبيريا", "ليبيا", "ليختنشتاين", "ليتوانيا", "لوكسمبورغ",
+            "مدغشقر", "مالاوي", "ماليزيا", "جزر المالديف", "مالي", "مالطا", "جزر مارشال", "موريتانيا", "موريشيوس", "المكسيك", "ميكرونيزيا", "مولدوفا", "موناكو", "منغوليا", "الجبل الأسود", "المغرب", "موزمبيق", "موزمبيق", "ميانمار",
+            "ناميبيا", "ناورو", "نيبال", "هولندا", "نيوزيلندا", "نيكاراغوا", "النيجر", "نيجيريا", "مقدونيا الشمالية", "النرويج",
+            "عمان",
+            "باكستان", "بالاو", "فلسطين", "بنما", "بابوا غينيا الجديدة", "باراغواي", "بيرو", "الفلبين", "بولندا", "البرتغال",
+            "قطر",
+            "رومانيا", "روسيا", "رواندا",
+            "سانت كيتس ونيفيس", "سانت لوسيا", "سانت فنسنت وجزر غرينادين", "ساموا", "سان مارينو", "ساو تومي وبرينسيب", "السعودية", "السنغال", "صربيا", "سيشيل", "سيراليون", "سنغافورة", "سلوفاكيا", "سلوفينيا", "جزر سليمان", "الصومال", "جنوب أفريقيا", "جنوب السودان", "إسبانيا", "سريلانكا", "السودان", "سورينام", "السويد", "سويسرا", "سوريا",
+            "تايوان", "طاجيكستان", "تنزانيا", "تايلاند", "تيمور الشرقية", "توغو", "تونغا", "ترينيداد وتوباغو", "تونس", "تركيا", "تركمانستان", "توفالو",
+            "أوغندا", "أوكرانيا", "الإمارات العربية المتحدة", "المملكة المتحدة", "الولايات المتحدة الأمريكية", "أوروغواي", "أوزبكستان",
+            "فانواتو", "الفاتيكان", "فنزويلا", "فيتنام",
+            "اليمن",
+            "زامبيا", "زيمبابوي"
+        ].sort();
+
+        function generateNationalityDropdown(participantIndex) {
+            let options = nationalities.map(nat => `<option value="${nat}">${nat}</option>`).join('');
+            return `
+                <div class="form-group">
+                    <label for="nationality${participantIndex}">جنسية المشارك ${participantIndex + 1}:</label>
+                    <select id="nationality${participantIndex}" name="nationality${participantIndex}" required>
+                        <option value="">اختر الجنسية</option>
+                        ${options}
+                    </select>
+                </div>
+            `;
+        }
+
+        function generateParticipantFields() {
+            let num = parseInt(numParticipantsInput.value);
+            if (isNaN(num) || num < 1) num = 1;
+            numParticipantsInput.value = num;
+
+            additionalParticipantsInfo.innerHTML = ''; // Clear previous fields
+
+            for (let i = 0; i < num; i++) {
+                const participantDiv = document.createElement('div');
+                participantDiv.classList.add('participant-fields');
+
+                let maleChecked = '';
+                let femaleChecked = '';
+
+                // For "couples" scenario (2 participants), force male/female
+                if (num === 2) {
+                    if (i === 0) maleChecked = 'checked'; // First is male
+                    if (i === 1) femaleChecked = 'checked'; // Second is female
+                }
+
+                // Determine the heading text based on participant count
+                let participantHeading = '';
+                if (num === 1) {
+                    participantHeading = 'معلومات المشارك'; // No numbering if only one participant
+                } else {
+                    participantHeading = `معلومات المشارك ${i + 1}`;
+                }
+
+                participantDiv.innerHTML = `
+                    <h3>${participantHeading}</h3>
+                    <div class="form-group">
+                        <label for="participantName${i}">اسم المشارك ${i + 1} (الاسم الكامل):</label>
+                        <input type="text" id="participantName${i}" name="participantName${i}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="participantAge${i}">عمر المشارك ${i + 1}:</label>
+                        <input type="number" id="participantAge${i}" name="participantAge${i}" min="18" max="45" required oninput="validateAge(this)">
+                        <span class="error-message" id="ageError${i}" style="display: none;">عذراً، يجب أن يكون عمر المشارك بين 18 و 45 عاماً.</span>
+                        <span class="age-warning-message" id="ageWarning${i}" style="display: none;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>جنس المشارك ${i + 1}:</label>
+                        <div class="radio-group">
+                            <label for="participantGenderMale${i}"><input type="radio" id="participantGenderMale${i}" name="participantGender${i}" value="male" ${maleChecked} required ${num === 2 ? 'disabled' : ''}> ذكر</label>
+                            <label for="participantGenderFemale${i}"><input type="radio" id="participantGenderFemale${i}" name="participantGender${i}" value="female" ${femaleChecked} required ${num === 2 ? 'disabled' : ''}> أنثى</label>
+                        </div>
+                    </div>
+                    ${generateNationalityDropdown(i)}
+                    ${i < num - 1 ? '<hr style="margin: 20px 0; border-top: 1px dashed #ccc;">' : ''}
+                `;
+                additionalParticipantsInfo.appendChild(participantDiv);
+
+                // Add event listeners for newly created gender radios for couples scenario
+                if (num === 2) {
+                    const maleRadio = document.getElementById(`participantGenderMale${i}`);
+                    const femaleRadio = document.getElementById(`participantGenderFemale${i}`);
+                    if (i === 0) { maleRadio.checked = true; }
+                    if (i === 1) { femaleRadio.checked = true; }
+                }
+            }
+            calculateTotal();
+            updateSubmitButtonState();
+        }
+
+        function validateAge(inputElement) {
+            const age = parseInt(inputElement.value);
+            const errorElement = document.getElementById(`ageError${inputElement.id.replace('participantAge', '')}`);
+            const warningElement = document.getElementById(`ageWarning${inputElement.id.replace('participantAge', '')}`);
+            const isValid = !isNaN(age) && age >= 18 && age <= 45;
+
+            if (inputElement.value.trim() === '' || isNaN(age)) {
+                errorElement.style.display = 'block';
+                errorElement.textContent = 'الرجاء إدخال العمر.';
+                warningElement.style.display = 'none';
+                inputElement.classList.add('input-error');
+            } else if (!isValid) {
+                errorElement.style.display = 'block';
+                errorElement.textContent = 'عذراً، يجب أن يكون عمر المشارك بين 18 و 45 عاماً.';
+                warningElement.style.display = 'none';
+                inputElement.classList.add('input-error');
+            } else {
+                errorElement.style.display = 'none';
+                warningElement.style.display = 'none';
+                inputElement.classList.remove('input-error');
+            }
+            updateSubmitButtonState();
+        }
+
+        function calculateTotal() {
+            let participants = parseInt(numParticipantsInput.value);
+            if (isNaN(participants) || participants < 1) {
+                participants = 1;
+                numParticipantsInput.value = 1;
+            }
+
+            let currentTotal = pricePerPersonBase * participants;
+            let discountAmount = 0;
+
+            groupDiscountRow.style.display = 'none';
+            friendDiscountRow.style.display = 'none';
+
+            if (participants >= 3) {
+                discountAmount = currentTotal * groupDiscountRate;
+                groupDiscountRow.style.display = 'flex';
+                groupDiscountAmount.textContent = `- ${discountAmount.toFixed(2)} ${currency}`;
+            } else if (participants === 2) {
+                discountAmount = currentTotal * friendDiscountRate;
+                friendDiscountRow.style.display = 'flex';
+                friendDiscountAmount.textContent = `- ${discountAmount.toFixed(2)} ${currency}`;
+            }
+
+            currentTotal -= discountAmount;
+
+            pricePerPersonDisplay.textContent = `${pricePerPersonBase.toFixed(2)} ${currency}`;
+            participantsCountDisplay.textContent = participants;
+            totalAmountDisplay.textContent = `${currentTotal.toFixed(2)} ${currency}`;
+
+            let totalHiddenInput = document.getElementById('totalPriceHidden');
+            if (!totalHiddenInput) {
+                totalHiddenInput = document.createElement('input');
+                totalHiddenInput.type = 'hidden';
+                totalHiddenInput.id = 'totalPriceHidden';
+                totalHiddenInput.name = 'totalPrice';
+                bookingForm.appendChild(totalHiddenInput);
+            }
+            totalHiddenInput.value = currentTotal.toFixed(2);
+        }
+
+        function updateSubmitButtonState() {
+            let allFieldsValid = true;
+
+            const requiredContactInputs = ['fullName', 'email', 'phone'];
+            requiredContactInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (!input || !input.value.trim()) {
+                    allFieldsValid = false;
+                }
+            });
+
+            if (!agreeTermsCheckbox.checked) {
+                allFieldsValid = false;
+            }
+
+            const num = parseInt(numParticipantsInput.value);
+            for (let i = 0; i < num; i++) {
+                // Validate participant name
+                const nameInput = document.getElementById(`participantName${i}`);
+                if (!nameInput || !nameInput.value.trim()) {
+                    allFieldsValid = false;
+                }
+
+                // Validate participant age
+                const ageInput = document.getElementById(`participantAge${i}`);
+                if (!ageInput || isNaN(parseInt(ageInput.value)) || parseInt(ageInput.value) < 18 || parseInt(ageInput.value) > 45) {
+                    allFieldsValid = false;
+                }
+
+                // Validate participant gender
+                const genderMale = document.getElementById(`participantGenderMale${i}`);
+                const genderFemale = document.getElementById(`participantGenderFemale${i}`);
+                if (!genderMale || !genderFemale || (!genderMale.checked && !genderFemale.checked)) {
+                    allFieldsValid = false;
+                }
+
+                // Validate participant nationality
+                const nationalitySelect = document.getElementById(`nationality${i}`);
+                if (!nationalitySelect || !nationalitySelect.value) {
+                    allFieldsValid = false;
+                }
+            }
+
+            const today = new Date();
+            if (today > LAST_REG_DATE) {
+                allFieldsValid = false;
+                console.warn('عذراً، لقد انتهى موعد التسجيل للمخيم.');
+            }
+
+            submitBookingBtn.disabled = !allFieldsValid;
+        }
+
+        // Event listeners
+        numParticipantsInput.addEventListener('input', () => {
+            generateParticipantFields();
+            calculateTotal();
+            updateSubmitButtonState();
+        });
+
+        additionalParticipantsInfo.addEventListener('input', (event) => {
+            if (event.target.id.startsWith('participantAge')) {
+                validateAge(event.target);
+            }
+            updateSubmitButtonState(); // Call for any input change in participant fields
+        });
+
+        additionalParticipantsInfo.addEventListener('change', (event) => {
+            if (event.target.name.startsWith('participantGender') || event.target.id.startsWith('nationality')) {
+                 updateSubmitButtonState(); // Call for any change in participant fields (radio/select)
+            }
+        });
+
+        agreeTermsCheckbox.addEventListener('change', updateSubmitButtonState);
+
+        // Initial setup
+        generateParticipantFields();
+        calculateTotal();
+        updateSubmitButtonState();
+
+        // Add event listener for form submission to handle backend
+        bookingForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            updateSubmitButtonState();
+
+            if (submitBookingBtn.disabled) {
+                alert('الرجاء التأكد من تعبئة جميع الحقول المطلوبة والموافقة على الشروط والأحكام، وأن أعمار المشاركين ضمن النطاق المسموح به (18-45 عاماً).');
+                return;
+            }
+
+            const formData = new FormData(bookingForm);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            data.participants = [];
+            const num = parseInt(data.numParticipants);
+            for (let i = 0; i < num; i++) {
+                const participantData = {
+                    name: data[`participantName${i}`],
+                    age: data[`participantAge${i}`],
+                    gender: data[`participantGender${i}`],
+                    nationality: data[`nationality${i}`]
+                };
+
+                // For couples (2 participants), override gender if needed
+                if (num === 2) {
+                    if (i === 0) participantData.gender = 'male';
+                    if (i === 1) participantData.gender = 'female';
+                }
+                data.participants.push(participantData);
+
+                // Clean up individual fields after grouping
+                delete data[`participantName${i}`];
+                delete data[`participantAge${i}`];
+                delete data[`participantGender${i}`];
+                delete data[`nationality${i}`];
+            }
+
+            try {
+                const response = await fetch(bookingForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.text();
+                if (response.ok) {
+                    alert('تم إرسال طلب الحجز بنجاح! يرجى التحقق من بريدك الإلكتروني لتأكيد الحجز، وسنتواصل معك قريباً لإتمام الدفع وتأكيد الحجز النهائي.');
+                    bookingForm.reset();
+                    generateParticipantFields();
+                    updateSubmitButtonState();
+                } else {
+                    alert(`خطأ في إرسال طلب الحجز: ${result}`);
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('حدث خطأ أثناء إرسال طلب الحجز. يرجى المحاولة مرة أخرى لاحقاً.');
+            }
+        });
+
+    </script>
+</body>
+</html>

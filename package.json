@@ -1,0 +1,89 @@
+// هذا كود توضيحي لـ Node.js، يجب أن يكون على خادم منفصل
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const app = express();
+const port = 3000; // أو أي منفذ آخر
+
+app.use(bodyParser.json()); // لدعم قراءة JSON
+app.use(bodyParser.urlencoded({ extended: true })); // لدعم قراءة URL-encoded bodies
+
+// إعداد Nodemailer - استخدم بيانات Gmail الخاصة بك أو خدمة بريد إلكتروني أخرى
+// **هام: لا تضع معلومات تسجيل الدخول الحساسة مباشرة في الكود إذا كان عامًا! استخدم متغيرات البيئة.**
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'your_gmail_email@gmail.com', // استبدل ببريدك الإلكتروني
+        pass: 'your_gmail_app_password' // استبدل بكلمة مرور التطبيق لـ Gmail (تحتاج لإنشائها)
+    }
+});
+
+app.post('/submit-booking', async (req, res) => {
+    const { fullName, email, phone, age, gender, numParticipants, nationality, arrivalDate, notes, totalPrice } = req.body;
+
+    // التحقق من البيانات هنا (يمكنك إضافة المزيد من التحقق)
+    if (!fullName || !email || !phone || !age || !numParticipants || !nationality || !arrivalDate) {
+        return res.status(400).send('الرجاء تعبئة جميع الحقول المطلوبة.');
+    }
+
+    // رسالة الإيميل إليك (الإدارة)
+    const mailToAdminOptions = {
+        from: 'your_gmail_email@gmail.com',
+        to: 'unitedhr8@gmail.com',
+        subject: `طلب حجز جديد لمخيم شيلا من ${fullName}`,
+        html: `
+            <h2>تفاصيل الحجز الجديد:</h2>
+            <p><strong>الاسم الكامل:</strong> ${fullName}</p>
+            <p><strong>البريد الإلكتروني:</strong> ${email}</p>
+            <p><strong>رقم الهاتف:</strong> ${phone}</p>
+            <p><strong>العمر:</strong> ${age}</p>
+            <p><strong>الجنس:</strong> ${gender}</p>
+            <p><strong>الجنسية:</strong> ${nationality}</p>
+            <p><strong>عدد المشاركين:</strong> ${numParticipants}</p>
+            <p><strong>تاريخ بدء المخيم المقترح:</strong> ${arrivalDate}</p>
+            <p><strong>المبلغ الإجمالي المدفوع/المطلوب:</strong> ${totalPrice}</p>
+            <p><strong>ملاحظات:</strong> ${notes || 'لا توجد'}</p>
+        `
+    };
+
+    // رسالة الإيميل للعميل
+    const mailToClientOptions = {
+        from: 'your_gmail_email@gmail.com',
+        to: email,
+        subject: 'تأكيد حجزك في مخيم استكشف شيلا!',
+        html: `
+            <h2>مرحباً ${fullName},</h2>
+            <p>نشكرك على حجزك في مخيم "استكشف شيلا". يسعدنا انضمامك إلينا في مغامرة لا تُنسى!</p>
+            <h3>تفاصيل حجزك:</h3>
+            <ul>
+                <li><strong>تاريخ بدء المخيم:</strong> 15/07/2025 (يرجى الالتزام بهذا التاريخ)</li>
+                <li><strong>عدد المشاركين:</strong> ${numParticipants}</li>
+                <li><strong>المبلغ الإجمالي:</strong> ${totalPrice}</li>
+            </ul>
+            <h3>معلومات هامة:</h3>
+            <p>آخر موعد للتسجيل والدفع هو 10/07/2025.</p>
+            <h3>سياسة الاسترداد:</h3>
+            <ul>
+                <li>في حال الإلغاء قبل <strong>7 أيام</strong> من تاريخ بدء المخيم، يتم استرداد <strong>80%</strong> من قيمة المبلغ المدفوع.</li>
+                <li>في حال الإلغاء قبل <strong>3 أيام</strong> من تاريخ بدء المخيم، يتم استرداد <strong>70%</strong> من قيمة المبلغ المدفوع.</li>
+                <li>في حال الإلغاء قبل <strong>24 ساعة</strong> أو أقل من تاريخ بدء المخيم، <strong>لا يتم استرداد أي مبلغ</strong>.</li>
+            </ul>
+            <p>للمزيد من المعلومات، يرجى زيارة <a href="http://www.yourwebsite.com/index.html#terms">الشروط والأحكام</a>.</p>
+            <p>نتطلع لرؤيتك قريباً في شيلا!</p>
+            <p>مع تحيات,<br>فريق Istanova</p>
+        `
+    };
+
+    try {
+        await transporter.sendMail(mailToAdminOptions);
+        await transporter.sendMail(mailToClientOptions);
+        res.status(200).send('تم إرسال طلب الحجز بنجاح. تحقق من بريدك الإلكتروني!');
+    } catch (error) {
+        console.error('فشل إرسال البريد الإلكتروني:', error);
+        res.status(500).send('حدث خطأ أثناء معالجة طلبك. يرجى المحاولة مرة أخرى.');
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+});
