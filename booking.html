@@ -3,463 +3,569 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>احجز الآن - استكشف شيلا</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>صفحة الحجز - اسم رحلتك</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Specific styles for booking page (Keep existing styles or add new ones if needed) */
-        .booking-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1920x400?text=Booking+Page+Header') no-repeat center center/cover;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-            margin-bottom: 0;
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            direction: rtl; /* Right-to-left for Arabic */
+            text-align: right; /* Align text to the right */
         }
-        .booking-hero h1 {
-            color: var(--white);
-            font-size: 3.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .booking-section {
-            background-color: var(--white);
-            padding: 60px 0;
-            box-shadow: var(--shadow);
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 30px;
             border-radius: 8px;
-            transform: translateY(-40px);
-            position: relative;
-            z-index: 1;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
-        .booking-form {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            box-shadow: var(--shadow);
-            text-align: right;
-        }
-        .booking-form h3 {
+
+        h1, h2, h3 {
+            color: #2c3e50;
             text-align: center;
-            margin-bottom: 30px;
-            color: var(--primary-color);
+            margin-bottom: 20px;
         }
-        .form-group {
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        /* Form Styles */
+        .form-section {
+            background-color: #ecf0f1;
+            padding: 25px;
+            border-radius: 8px;
             margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
         }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: var(--text-color);
+            color: #34495e;
         }
+
         .form-group input[type="text"],
         .form-group input[type="email"],
         .form-group input[type="tel"],
-        .form-group input[type="number"],
         .form-group input[type="date"],
+        .form-group input[type="number"],
         .form-group select,
         .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
+            width: calc(100% - 20px); /* Adjust for padding */
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1em;
-            background-color: var(--white);
-            color: var(--text-color);
+            font-size: 16px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            text-align: right; /* Align text inside inputs to the right */
         }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        .form-group input[type="radio"],
+
         .form-group input[type="checkbox"] {
-            margin-left: 8px;
-            vertical-align: middle;
+            margin-left: 10px; /* Space from label */
         }
-        .form-group .radio-group label,
-        .form-group .checkbox-group label {
+
+        .radio-group label {
             display: inline-block;
-            margin-left: 15px;
+            margin-left: 20px; /* Space between radio options */
             font-weight: normal;
         }
-        .form-group .radio-group,
-        .form-group .checkbox-group {
+
+        .radio-group input[type="radio"] {
+            margin-left: 5px;
+        }
+
+        .total-summary {
+            background-color: #e8f5e9; /* Light green for summary */
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid #d4edda;
+        }
+
+        .total-summary p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .total-summary p strong {
+            color: #28a745; /* Green for total amount */
+            font-size: 1.2em;
+        }
+
+        .total-summary .discount {
+            color: #dc3545; /* Red for discount */
+            font-weight: bold;
+        }
+
+        /* Participant Fields */
+        .participant-fields {
+            background-color: #f0f4f7; /* Slightly different background for individual participant sections */
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #dcdcdc;
+        }
+
+        .participant-fields h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-align: right;
+        }
+
+        /* Payment Methods */
+        .payment-methods-section {
+            background-color: #ecf0f1;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .payment-methods-icons {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 10px;
-        }
-
-        .terms-checkbox {
-            margin-top: 30px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: flex-start;
-            flex-direction: row-reverse;
-            justify-content: flex-end;
-        }
-        .terms-checkbox input[type="checkbox"] {
-            margin-right: 10px;
-            margin-top: 3px;
-            flex-shrink: 0;
-        }
-        .terms-checkbox label {
-            font-weight: normal;
-            cursor: pointer;
-        }
-        .terms-checkbox label a {
-            color: var(--primary-color);
-            text-decoration: underline;
-            transition: color 0.3s ease;
-        }
-        .terms-checkbox label a:hover {
-            color: var(--secondary-color);
-        }
-
-        .invoice-summary {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 25px;
-            margin-top: 40px;
-            box-shadow: var(--shadow);
-            text-align: right;
-            font-size: 1.1em;
-        }
-        .invoice-summary h3 {
-            color: var(--secondary-color);
-            text-align: right;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .invoice-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed #f0f0f0;
-        }
-        .invoice-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        .invoice-total {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: var(--primary-color);
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             margin-top: 20px;
-            padding-top: 15px;
-            border-top: 2px solid var(--accent-color);
-        }
-        .invoice-discount {
-            color: #dc3545;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px dashed #f0f0f0;
+            margin-bottom: 30px;
         }
 
-        .payment-info {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+        .payment-method-icon {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 120px; /* Fixed width */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
         }
-        .payment-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
+
+        .payment-method-icon:hover {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
         }
-        .payment-methods p {
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            line-height: 1.8;
-            color: var(--text-color);
+
+        .payment-method-icon.selected {
+            border-color: #007bff;
+            background-color: #e7f3ff; /* Light blue background for selected */
+            box-shadow: 0 0 12px rgba(0, 123, 255, 0.4);
         }
-        .payment-methods span {
+
+        .payment-method-icon i {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+        .payment-method-icon img { /* For PayPal, Papara logos etc. */
+            max-width: 60px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .payment-method-icon span {
             font-weight: bold;
-            color: var(--secondary-color);
+            font-size: 0.9em;
+            color: #333;
         }
-        .payment-methods ul {
+
+        .payment-details-section {
+            display: none; /* Hidden by default */
+            border: 1px solid #cce5ff;
+            background-color: #e0f2ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .payment-details-section.active {
+            display: block; /* Shown when active */
+        }
+
+        .payment-details-section h4 {
+            color: #0056b3;
+            margin-top: 0;
+        }
+
+        .payment-details-section ul {
             list-style: none;
             padding: 0;
-            margin-top: 10px;
-        }
-        .payment-methods ul li {
-            background-color: var(--white);
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-        }
-        .payment-methods ul li i {
-            font-size: 1.8em;
-            color: var(--primary-color);
-            margin-left: 15px;
-        }
-        .payment-methods ul li strong {
-            color: var(--primary-color);
+            margin-top: 15px;
         }
 
-        .booking-submit-btn {
-            width: auto;
-            display: block;
-            margin: 30px auto 0;
-            background-color: var(--secondary-color);
-            color: var(--white);
-            padding: 15px 40px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2em;
-            transition: background-color 0.3s ease;
+        .payment-details-section ul li {
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-right: 3px solid #007bff; /* Little accent */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .booking-submit-btn:hover {
+
+        .payment-details-section ul li strong {
+            color: #007bff;
+        }
+
+        .payment-details-section p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Buttons */
+        .booking-submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .booking-submit-btn:hover:not(:disabled) {
             background-color: #218838;
         }
+
         .booking-submit-btn:disabled {
-            background-color: #ccc;
+            background-color: #cccccc;
             cursor: not-allowed;
         }
 
-        /* Styles for dynamic participant fields */
-        .participant-fields {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: var(--white);
-        }
-        .participant-fields h3 {
-            text-align: right;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-        .input-error {
-            border-color: red !important;
-        }
-        .error-message {
+        /* Age Warning */
+        .age-warning-message {
             color: #dc3545;
             font-size: 0.9em;
             margin-top: 5px;
-            display: block;
+            display: block; /* Ensure it takes its own line */
+            text-align: right;
         }
-        .age-warning-message {
-            color: orange;
-            font-size: 0.9em;
-            margin-top: 5px;
-            display: block;
+
+        .input-error {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
         }
-        /* Responsive adjustments for booking page */
-        @media (max-width: 768px) {
-            .booking-hero h1 {
-                font-size: 2.5em;
-            }
-            .booking-form {
-                padding: 20px;
-            }
-            .terms-checkbox {
+
+        /* Phone Country Code Select */
+        #countryCode {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        #countryCode option {
+            display: flex;
+            align-items: center;
+        }
+        #countryCode option img.country-flag {
+            margin-right: 8px; /* Space between flag and text */
+            margin-left: 0; /* Override default margin-left */
+            vertical-align: middle;
+            width: 24px; /* Adjust flag size */
+            height: 18px; /* Adjust flag size */
+            border: 1px solid #eee; /* Light border for flags */
+        }
+        
+        /* Mobile Navbar */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 8vh;
+            background-color: #5d6d7e;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+        }
+
+        .nav-links li {
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                height: 92vh;
+                top: 8vh;
+                background-color: #5d6d7e;
+                display: flex;
                 flex-direction: column;
-                align-items: flex-end;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
             }
-            .terms-checkbox input[type="checkbox"] {
-                margin-right: 0;
-                margin-bottom: 10px;
+
+            .nav-links li {
+                opacity: 0;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-active {
+                transform: translateX(0%);
+            }
+
+            .nav-active li {
+                opacity: 1;
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .toggle .line2 {
+                opacity: 0;
+            }
+
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <img src="https://via.placeholder.com/100x50?text=Istanova" alt="شعار Istanova">
-                </div>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="index.html#hero">الرئيسية</a></li>
-                    <li><a href="index.html#about">عن المخيم</a></li>
-                    <li><a href="index.html#program">البرنامج</a></li>
-                    <li><a href="index.html#included">المخيم الشامل</a></li>
-                    <li><a href="index.html#why-join">لماذا تنضم؟</a></li>
-                    <li><a href="index.html#offers">عروض وخصومات</a></li>
-                    <li><a href="index.html#terms">الشروط والأحكام</a></li>
-                    <li><a href="index.html#what-to-bring">ماذا تحضر؟</a></li>
-                    <li><a href="index.html#contact">تواصل معنا</a></li>
-                    <li><a href="booking.html" class="nav-btn">احجز الآن</a></li>
-                </ul>
-                <div class="burger" id="burger">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
-                </div>
-            </nav>
+    <nav>
+        <div class="logo">
+            <h4>رحلات مذهلة</h4>
         </div>
-    </header>
-
-    <main>
-        <section class="booking-hero">
-            <div class="hero-content">
-                <h1>احجز مقعدك في مغامرة شيلا!</h1>
-            </div>
-        </section>
-
-        <section class="booking-section container">
-            <h2>نموذج الحجز والدفع</h2>
-            <p class="section-description">يرجى ملء المعلومات التالية لتأكيد حجزك في مخيم "استكشف شيلا".</p>
-
-            <div class="booking-form">
-                <form id="bookingForm" action="http://localhost:3000/submit-booking" method="POST">
-                    <h3>معلومات الحجز الشخصية</h3>
-                    <div class="form-group">
-                        <label for="fullName">الاسم الكامل (المتقدم للحجز):</label>
-                        <input type="text" id="fullName" name="fullName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">رقم الهاتف (مع رمز الدولة):</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+90 5XX XXXXXXX" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="numParticipants">عدد المشاركين (شاملًا لك):</label>
-                        <input type="number" id="numParticipants" name="numParticipants" value="1" min="1" required>
-                    </div>
-
-                    <div id="additionalParticipantsInfo">
-                        </div>
-
-                    <div class="form-group">
-                        <label for="arrivalDate">تاريخ بدء المخيم:</label>
-                        <input type="text" id="arrivalDate" name="arrivalDate" value="15/07/2025" readonly>
-                        <small>هذا هو التاريخ الثابت لبدء المخيم.</small>
-                    </div>
-                     <div class="form-group">
-                        <label for="notes">ملاحظات أو متطلبات خاصة (حساسية، نظام غذائي، إلخ):</label>
-                        <textarea id="notes" name="notes"></textarea>
-                    </div>
-
-                    <div class="invoice-summary">
-                        <h3>ملخص الفاتورة</h3>
-                        <div class="invoice-item">
-                            <span>سعر الشخص الواحد:</span>
-                            <span id="pricePerPersonDisplay"></span>
-                        </div>
-                        <div class="invoice-item">
-                            <span>عدد المشاركين:</span>
-                            <span id="participantsCountDisplay"></span>
-                        </div>
-                        <div class="invoice-discount" id="groupDiscountRow" style="display: none;">
-                            <span>خصم المجموعات (15%):</span>
-                            <span id="groupDiscountAmount"></span>
-                        </div>
-                        <div class="invoice-discount" id="friendDiscountRow" style="display: none;">
-                            <span>خصم الأصدقاء (10%):</span>
-                            <span id="friendDiscountAmount"></span>
-                        </div>
-                        <div class="invoice-total">
-                            <span>المبلغ الإجمالي المطلوب:</span>
-                            <span id="totalAmountDisplay"></span>
-                        </div>
-                         <p style="text-align: center; font-size: 0.9em; color: var(--secondary-color); margin-top: 15px;">خصم خاص للمجموعات (3 أشخاص فأكثر) أو خصم الأصدقاء (شخصان).</p>
-                    </div>
-
-                    <div class="payment-info">
-                        <h3>معلومات الدفع</h3>
-                        <p>لتأكيد حجزك، يرجى إتمام عملية الدفع.</p>
-                        <p>نحن نوفر خيارات الدفع التالية:</p>
-                        <div class="payment-methods">
-                            <ul>
-                                <li>
-                                    <i class="fas fa-bank"></i>
-                                    <div>
-                                        <strong>التحويل البنكي:</strong>
-                                        <p>اسم البنك: [اسم البنك]<br>
-                                        اسم الحساب: Istanova Tourism<br>
-                                        رقم الحساب (IBAN): TRXX XXXX XXXX XXXX XXXX XXXX XX <br>
-                                        رمز السويفت (SWIFT/BIC): [رمز السويفت]</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <i class="fab fa-paypal"></i>
-                                    <div>
-                                        <strong>الدفع عبر PayPal:</strong>
-                                        <p>يمكنك الدفع مباشرة عبر حسابنا على PayPal: <a href="mailto:info@istanova.com">info@istanova.com</a> (يرجى إضافة رسوم خدمة PayPal إن وجدت).</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    <div>
-                                        <strong>الدفع نقدًا (للمقيمين في إسطنبول):</strong>
-                                        <p>يمكن ترتيب الدفع نقدًا في مكتبنا بـ **Istanbul Fatih, Yusufpaşa Tramvay Karşısı** بعد التواصل المسبق.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <p>**ملاحظة هامة:** يرجى إرسال **صورة أو إثبات لعملية الدفع** إلى بريدنا الإلكتروني (`info@istanova.com`) مع ذكر اسمك الكامل ورقم هاتفك لتأكيد حجزك بشكل نهائي.</p>
-                        </div>
-                    </div>
-
-                    <div class="terms-checkbox">
-                        <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
-                        <label for="agreeTerms">
-                            أوافق على <a href="index.html#terms" target="_blank">الشروط والأحكام</a> الخاصة بالمخيم.
-                        </label>
-                    </div>
-
-                    <button type="submit" class="booking-submit-btn" id="submitBookingBtn" disabled>تأكيد الحجز والدفع</button>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Istanova. جميع الحقوق محفوظة.</p>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">الرحلات</a></li>
+            <li><a href="#">من نحن</a></li>
+            <li><a href="#">اتصل بنا</a></li>
+        </ul>
+        <div class="burger" id="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
         </div>
-    </footer>
+    </nav>
 
-    <a href="https://wa.me/905457307235" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <div class="container">
+        <h1>تفاصيل الحجز</h1>
+        <p>تاريخ الرحلة: <strong id="arrivalDate"></strong></p>
+        <p>آخر موعد للتسجيل: <strong id="registrationDeadline"></strong></p>
 
+        <form id="bookingForm" action="#" method="POST">
+            <div class="form-section">
+                <h2>معلومات الحجز</h2>
+                <div class="form-group">
+                    <label for="fullName">اسمك الكامل:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">بريدك الإلكتروني:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="countryCode">رقم الهاتف:</label>
+                    <div style="display: flex; align-items: center;">
+                        <select id="countryCode" name="countryCode" style="width: 150px; flex-shrink: 0;">
+                            </select>
+                        <input type="tel" id="phone" name="phone" placeholder="ادخل الرقم بدون الرمز" required style="flex-grow: 1; margin-right: 10px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="numParticipants">عدد الأشخاص:</label>
+                    <input type="number" id="numParticipants" name="numParticipants" min="1" value="1" required>
+                </div>
+
+                <div class="form-group" id="friendshipTypeGroup" style="display: none;">
+                    <label>نوع العلاقة (إذا كان عدد المشاركين 2):</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="friendshipType" value="friends" checked> أصدقاء</label>
+                        <label><input type="radio" name="friendshipType" value="couple"> زوجين</label>
+                    </div>
+                </div>
+
+                <div id="additionalParticipantsInfo">
+                    </div>
+            </div>
+
+            <div class="total-summary">
+                <h2>ملخص التكلفة</h2>
+                <p>السعر للفرد: <span id="pricePerPersonDisplay"></span></p>
+                <p>عدد المشاركين: <span id="participantsCountDisplay"></span></p>
+                <p id="groupDiscountRow" style="display: none;">خصم المجموعات (15%): <span id="groupDiscountAmount" class="discount"></span></p>
+                <p id="friendDiscountRow" style="display: none;">خصم الأصدقاء/الزوجين: <span id="friendDiscountAmount" class="discount"></span></p>
+                <p><strong>المبلغ الإجمالي: <span id="totalAmountDisplay"></span></strong></p>
+            </div>
+
+            <div class="form-section payment-methods-section">
+                <h2>طرق الدفع</h2>
+                <div class="payment-methods-icons" id="paymentMethodsIcons">
+                    </div>
+
+                <div id="paypalDetails" class="payment-details-section">
+                    <h4>الدفع عبر PayPal</h4>
+                    <p>المبلغ الإجمالي: <span id="paypalAmountDisplay"></span></p>
+                    <p>يرجى النقر على زر PayPal أدناه لإتمام الدفع.</p>
+                    <div id="paypal-button-container"></div>
+                </div>
+
+                <div id="bankTransferDetails" class="payment-details-section">
+                    <h4>الدفع عبر التحويل البنكي</h4>
+                    <p>يرجى التحويل إلى التفاصيل البنكية التالية:</p>
+                    <ul>
+                        <li>اسم البنك: **[اسم البنك هنا]**</li>
+                        <li>اسم الحساب: **[اسم صاحب الحساب]**</li>
+                        <li>رقم الحساب: **[رقم الحساب البنكي]**</li>
+                        <li>رمز SWIFT/IBAN: **[رمز السويفت/الآيبان]**</li>
+                        <li>المبلغ: <strong id="bankTransferAmountDisplay"></strong></li>
+                    </ul>
+                    <p>بعد إتمام التحويل، يرجى إرسال إيصال الدفع إلى بريدنا الإلكتروني <strong>your_email@example.com</strong> لتأكيد حجزك.</p>
+                    <button type="button" class="booking-submit-btn" id="bankTransferBtn">تأكيد الحجز بتحويل بنكي</button>
+                </div>
+
+                <div id="cashDetails" class="payment-details-section">
+                    <h4>الدفع النقدي</h4>
+                    <p>سيتم التواصل معك لترتيب عملية الدفع النقدي في أقرب وقت ممكن.</p>
+                    <p>المبلغ المطلوب: <strong id="cashAmountDisplay"></strong></p>
+                    <button type="button" class="booking-submit-btn" id="cashPaymentBtn">تأكيد الحجز بدفع نقدي</button>
+                </div>
+
+                <div id="instapayDetails" class="payment-details-section">
+                    <h4>الدفع عبر Instapay (مصر)</h4>
+                    <p>يرجى إتمام التحويل عبر تطبيق Instapay إلى العنوان التالي:</p>
+                    <ul>
+                        <li>عنوان Instapay (IPA): <strong>your.instapay.address</strong></li>
+                        <li>اسم المستلم: **JEHAD O. A. ABUSABRA**</li>
+                    </ul>
+                    <p>بعد إتمام التحويل، يرجى إرسال لقطة شاشة لإثبات الدفع عبر الواتساب أو البريد الإلكتروني لتأكيد حجزك بشكل نهائي.</p>
+                    <button type="button" class="booking-submit-btn instapay-btn">تأكيد الحجز بـ Instapay</button>
+                </div>
+
+                <div id="vodafoneCashDetails" class="payment-details-section">
+                    <h4>الدفع عبر Vodafone Cash (مصر)</h4>
+                    <p>يمكنك التحويل عبر خدمة فودافون كاش على رقم المحفظة التالي:</p>
+                    <ul>
+                        <li>رقم المحفظة: <strong>01094723155</strong></li>
+                        <li>اسم المستلم: **JEHAD O. A. ABUSABRA**</li>
+                    </ul>
+                    <p>بعد إتمام التحويل، يرجى إرسال لقطة شاشة لإثبات الدفع عبر الواتساب أو البريد الإلكتروني لتأكيد حجزك بشكل نهائي.</p>
+                    <button type="button" class="booking-submit-btn vodafone-cash-btn">تأكيد الحجز بـ Vodafone Cash</button>
+                </div>
+
+                <div id="paparaDetails" class="payment-details-section">
+                    <h4>الدفع عبر Papara (تركيا)</h4>
+                    <p>يرجى إتمام التحويل عبر تطبيق Papara إلى رقم الحساب التالي:</p>
+                    <ul>
+                        <li>رقم حساب Papara: <strong>1914417580</strong></li>
+                        <li>اسم المستلم: **JEHAD O. A. ABUSABRA**</li>
+                    </ul>
+                    <p>بعد إتمام التحويل، يرجى إرسال لقطة شاشة لإثبات الدفع عبر الواتساب أو البريد الإلكتروني لتأكيد حجزك بشكل نهائي.</p>
+                    <button type="button" class="booking-submit-btn papara-btn">تأكيد الحجز بـ Papara</button>
+                </div>
+
+                <div id="revolutDetails" class="payment-details-section">
+                    <h4>الدفع عبر Revolut</h4>
+                    <p>يرجى التواصل معنا للحصول على تفاصيل التحويل عبر Revolut.</p>
+                    <ul>
+                        <li>اسم المستخدم/الرقم: **[أدخل هنا]**</li>
+                    </ul>
+                    <button type="button" class="booking-submit-btn revolut-btn">تأكيد الحجز بـ Revolut</button>
+                </div>
+
+                <div id="optionDetails" class="payment-details-section">
+                    <h4>خيارات دفع آمنة أخرى</h4>
+                    <p>يمكننا تزويدك بخيارات دفع آمنة أخرى حسب موقعك. سيتم التواصل معك بعد إرسال الحجز.</p>
+                    <button type="button" class="booking-submit-btn option-btn">تأكيد الحجز بخيار آخر</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                <label for="agreeTerms">أوافق على <a href="#" target="_blank">الشروط والأحكام</a>.</label>
+            </div>
+
+            <button type="submit" class="booking-submit-btn" id="submitBookingBtn" disabled>إرسال طلب الحجز</button>
+        </form>
+    </div>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=AZtIgYRPcuH2KEI_ODxHzK6xEhXi1Hz1DzVXKGhdg0oVvHeS-C0TCJPPs5TOJXTdo5zfOv-ZcEQdHPhI&currency=USD"></script>
+    
     <script>
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
 
-        burger.addEventListener('click', () => {
-            navLinks.classList.toggle('nav-active');
-            burger.classList.toggle('toggle');
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navLinks.classList.contains('nav-active')) {
-                    navLinks.classList.remove('nav-active');
-                    burger.classList.remove('toggle');
-                }
+        if (burger && navLinks) {
+            burger.addEventListener('click', () => {
+                navLinks.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
             });
-        });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('nav-active')) {
+                        navLinks.classList.remove('nav-active');
+                        burger.classList.remove('toggle');
+                    }
+                });
+            });
+        }
 
         // Booking Form Logic
         const CAMP_DATE = new Date('2025-07-15T00:00:00');
         const LAST_REG_DATE = new Date('2025-07-10T23:59:59');
 
         const pricePerPersonBase = 450;
-        const groupDiscountRate = 0.15;
-        const friendDiscountRate = 0.10;
-        const currency = "USD";
+        const groupDiscountRate = 0.15; // 15% for 3+ people
+        const friendDiscountRate = 0.10; // 10% for 2 friends
+        const coupleDiscountRate = 0.15; // 15% for 2 couples
+        const currency = "USD"; // Make sure this matches your PayPal currency setup
 
         const numParticipantsInput = document.getElementById('numParticipants');
         const pricePerPersonDisplay = document.getElementById('pricePerPersonDisplay');
@@ -473,6 +579,32 @@
         const submitBookingBtn = document.getElementById('submitBookingBtn');
         const additionalParticipantsInfo = document.getElementById('additionalParticipantsInfo');
         const bookingForm = document.getElementById('bookingForm');
+        
+        // New elements for payment methods
+        const paymentMethodsIconsContainer = document.getElementById('paymentMethodsIcons');
+        const paypalDetailsSection = document.getElementById('paypalDetails');
+        const bankTransferDetailsSection = document.getElementById('bankTransferDetails');
+        const cashDetailsSection = document.getElementById('cashDetails');
+        const instapayDetailsSection = document.getElementById('instapayDetails');
+        const vodafoneCashDetailsSection = document.getElementById('vodafoneCashDetails');
+        const paparaDetailsSection = document.getElementById('paparaDetails');
+        const revolutDetailsSection = document.getElementById('revolutDetails');
+        const optionDetailsSection = document.getElementById('optionDetails');
+
+        // New elements for phone number
+        const countryCodeSelect = document.getElementById('countryCode');
+        const phoneInput = document.getElementById('phone');
+
+        // New elements for friendship type
+        const friendshipTypeGroup = document.getElementById('friendshipTypeGroup');
+        let friendshipTypeRadios; // Will be set after friendshipTypeGroup is available
+
+        let currentTotalAmount = 0; // Global variable to store current calculated total
+        let selectedPaymentMethod = null; // Track selected payment method
+
+        // Allowed age range
+        const MIN_AGE = 18;
+        const MAX_AGE = 45;
 
         const nationalities = [
             "أفغانستان", "ألبانيا", "الجزائر", "أندورا", "أنغولا", "أنتيغوا وباربودا", "الأرجنتين", "أرمينيا", "أستراليا", "النمسا", "أذربيجان",
@@ -500,11 +632,55 @@
             "زامبيا", "زيمبابوي"
         ].sort();
 
+        // Data for country codes with flag paths
+        const countryCodes = [
+            { name: "مصر", code: "EG", dial_code: "+20", flag_img: "flags/eg.png" },
+            { name: "تركيا", code: "TR", dial_code: "+90", flag_img: "flags/tr.png" },
+            { name: "الإمارات العربية المتحدة", code: "AE", dial_code: "+971", flag_img: "flags/ae.png" },
+            { name: "السعودية", code: "SA", dial_code: "+966", flag_img: "flags/sa.png" },
+            { name: "الكويت", code: "KW", dial_code: "+965", flag_img: "flags/kw.png" },
+            { name: "قطر", code: "QA", dial_code: "+974", flag_img: "flags/qa.png" },
+            { name: "البحرين", code: "BH", dial_code: "+973", flag_img: "flags/bh.png" },
+            { name: "عمان", code: "OM", dial_code: "+968", flag_img: "flags/om.png" },
+            { name: "الأردن", code: "JO", dial_code: "+962", flag_img: "flags/jo.png" },
+            { name: "فلسطين", code: "PS", dial_code: "+970", flag_img: "flags/ps.png" },
+            { name: "لبنان", code: "LB", dial_code: "+961", flag_img: "flags/lb.png" },
+            { name: "ألمانيا", code: "DE", dial_code: "+49", flag_img: "flags/de.png" },
+            { name: "المملكة المتحدة", code: "GB", dial_code: "+44", flag_img: "flags/gb.png" },
+            { name: "الولايات المتحدة", code: "US", dial_code: "+1", flag_img: "flags/us.png" },
+            // Add more countries as needed with their flag images
+        ];
+
+        // Data for payment methods by dial code
+        const paymentMethodsByDialCode = {
+            "+20": ["instapay", "vodafoneCash", "bankTransfer", "paypal"], // Egypt - Added PayPal as it's international
+            "+90": ["bankTransfer", "cash", "papara", "paypal"], // Turkey
+            "+971": ["bankTransfer", "paypal", "option"], // UAE
+            "+966": ["bankTransfer", "paypal"], // Saudi Arabia
+            "+965": ["bankTransfer", "paypal"], // Kuwait
+            "+974": ["bankTransfer", "paypal"], // Qatar
+            "+49": ["bankTransfer", "revolut", "paypal"], // Germany
+            "+44": ["bankTransfer", "revolut", "paypal"], // UK
+            "+1": ["paypal", "bankTransfer"], // USA - Added Bank Transfer as an option
+            "default": ["bankTransfer", "paypal"] // Default for all other dial codes
+        };
+
+        const paymentMethodDetails = {
+            "bankTransfer": { icon: "fas fa-bank", name: "تحويل بنكي", section: bankTransferDetailsSection },
+            "paypal": { icon: "fab fa-paypal", name: "PayPal", section: paypalDetailsSection, img_src: "https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-mark.svg" },
+            "cash": { icon: "fas fa-money-bill-wave", name: "دفع نقدي", section: cashDetailsSection },
+            "instapay": { icon: "fas fa-wallet", name: "Instapay", section: instapayDetailsSection },
+            "vodafoneCash": { icon: "fas fa-mobile-alt", name: "Vodafone Cash", section: vodafoneCashDetailsSection },
+            "papara": { icon: "fas fa-wallet", name: "Papara", section: paparaDetailsSection, img_src: "https://www.papara.com/images/papara-logo-white-font.svg" },
+            "revolut": { icon: "fas fa-credit-card", name: "Revolut", section: revolutDetailsSection },
+            "option": { icon: "fas fa-file-invoice-dollar", name: "دفع آمن", section: optionDetailsSection }
+        };
+
         function generateNationalityDropdown(participantIndex) {
             let options = nationalities.map(nat => `<option value="${nat}">${nat}</option>`).join('');
             return `
                 <div class="form-group">
-                    <label for="nationality${participantIndex}">جنسية المشارك ${participantIndex + 1}:</label>
+                    <label for="nationality${participantIndex}">الجنسية:</label>
                     <select id="nationality${participantIndex}" name="nationality${participantIndex}" required>
                         <option value="">اختر الجنسية</option>
                         ${options}
@@ -520,271 +696,491 @@
 
             additionalParticipantsInfo.innerHTML = ''; // Clear previous fields
 
+            // Show/hide friendshipTypeGroup
+            if (num === 2) {
+                friendshipTypeGroup.style.display = 'block';
+                // Attach event listener to friendshipType radios if not already
+                if (!friendshipTypeRadios) {
+                    friendshipTypeRadios = document.querySelectorAll('input[name="friendshipType"]');
+                    friendshipTypeRadios.forEach(radio => {
+                        radio.addEventListener('change', () => {
+                            generateParticipantFields(); // Re-generate fields to apply gender rules
+                            calculateTotal(); // Recalculate for discount
+                            validateForm(); // Re-validate
+                        });
+                    });
+                }
+            } else {
+                friendshipTypeGroup.style.display = 'none';
+            }
+
+            const selectedFriendshipType = num === 2 ? document.querySelector('input[name="friendshipType"]:checked')?.value : null;
+
             for (let i = 0; i < num; i++) {
                 const participantDiv = document.createElement('div');
                 participantDiv.classList.add('participant-fields');
 
                 let maleChecked = '';
                 let femaleChecked = '';
+                let genderDisabled = '';
 
-                // For "couples" scenario (2 participants), force male/female
-                if (num === 2) {
+                if (selectedFriendshipType === 'couple') {
                     if (i === 0) maleChecked = 'checked'; // First is male
                     if (i === 1) femaleChecked = 'checked'; // Second is female
+                    genderDisabled = 'disabled'; // Disable gender selection for couples
                 }
 
-                // Determine the heading text based on participant count
                 let participantHeading = '';
+                let fullNameLabel = 'الاسم الكامل:';
+                let dobLabel = 'تاريخ الميلاد (YYYY-MM-DD):';
+                let genderLabel = 'الجنس:';
+                let nationalityLabel = 'الجنسية:';
+
                 if (num === 1) {
-                    participantHeading = 'معلومات المشارك'; // No numbering if only one participant
+                    participantHeading = 'معلومات الفرد';
                 } else {
-                    participantHeading = `معلومات المشارك ${i + 1}`;
+                    participantHeading = `معلومات المشارك رقم ${i + 1}`;
+                    fullNameLabel = `الاسم الكامل للمشارك ${i + 1}:`;
+                    dobLabel = `تاريخ الميلاد للمشارك ${i + 1} (YYYY-MM-DD):`;
+                    genderLabel = `جنس المشارك ${i + 1}:`;
+                    nationalityLabel = `جنسية المشارك ${i + 1}:`;
                 }
 
                 participantDiv.innerHTML = `
                     <h3>${participantHeading}</h3>
                     <div class="form-group">
-                        <label for="participantName${i}">اسم المشارك ${i + 1} (الاسم الكامل):</label>
-                        <input type="text" id="participantName${i}" name="participantName${i}" required>
+                        <label for="p${i}_fullName">${fullNameLabel}</label>
+                        <input type="text" id="p${i}_fullName" name="p${i}_fullName" required>
                     </div>
                     <div class="form-group">
-                        <label for="participantAge${i}">عمر المشارك ${i + 1}:</label>
-                        <input type="number" id="participantAge${i}" name="participantAge${i}" min="18" max="45" required oninput="validateAge(this)">
-                        <span class="error-message" id="ageError${i}" style="display: none;">عذراً، يجب أن يكون عمر المشارك بين 18 و 45 عاماً.</span>
-                        <span class="age-warning-message" id="ageWarning${i}" style="display: none;"></span>
+                        <label for="p${i}_dob">${dobLabel}</label>
+                        <input type="date" id="p${i}_dob" name="p${i}_dob" required onchange="checkAge(${i})">
+                        <span id="p${i}_ageWarning" class="age-warning-message" style="display:none;"></span>
                     </div>
                     <div class="form-group">
-                        <label>جنس المشارك ${i + 1}:</label>
+                        <label>${genderLabel}</label>
                         <div class="radio-group">
-                            <label for="participantGenderMale${i}"><input type="radio" id="participantGenderMale${i}" name="participantGender${i}" value="male" ${maleChecked} required ${num === 2 ? 'disabled' : ''}> ذكر</label>
-                            <label for="participantGenderFemale${i}"><input type="radio" id="participantGenderFemale${i}" name="participantGender${i}" value="female" ${femaleChecked} required ${num === 2 ? 'disabled' : ''}> أنثى</label>
+                            <label><input type="radio" name="p${i}_gender" value="male" ${maleChecked} ${genderDisabled} required> ذكر</label>
+                            <label><input type="radio" name="p${i}_gender" value="female" ${femaleChecked} ${genderDisabled}> أنثى</label>
                         </div>
                     </div>
-                    ${generateNationalityDropdown(i)}
-                    ${i < num - 1 ? '<hr style="margin: 20px 0; border-top: 1px dashed #ccc;">' : ''}
+                    <div class="form-group">
+                        <label for="nationality${i}">${nationalityLabel}</label>
+                        <select id="nationality${i}" name="nationality${i}" required>
+                            <option value="">اختر الجنسية</option>
+                            ${nationalities.map(nat => `<option value="${nat}">${nat}</option>`).join('')}
+                        </select>
+                    </div>
                 `;
                 additionalParticipantsInfo.appendChild(participantDiv);
-
-                // Add event listeners for newly created gender radios for couples scenario
-                if (num === 2) {
-                    const maleRadio = document.getElementById(`participantGenderMale${i}`);
-                    const femaleRadio = document.getElementById(`participantGenderFemale${i}`);
-                    if (i === 0) { maleRadio.checked = true; }
-                    if (i === 1) { femaleRadio.checked = true; }
-                }
             }
             calculateTotal();
-            updateSubmitButtonState();
+            validateForm(); // Re-validate after fields change
         }
 
-        function validateAge(inputElement) {
-            const age = parseInt(inputElement.value);
-            const errorElement = document.getElementById(`ageError${inputElement.id.replace('participantAge', '')}`);
-            const warningElement = document.getElementById(`ageWarning${inputElement.id.replace('participantAge', '')}`);
-            const isValid = !isNaN(age) && age >= 18 && age <= 45;
-
-            if (inputElement.value.trim() === '' || isNaN(age)) {
-                errorElement.style.display = 'block';
-                errorElement.textContent = 'الرجاء إدخال العمر.';
-                warningElement.style.display = 'none';
-                inputElement.classList.add('input-error');
-            } else if (!isValid) {
-                errorElement.style.display = 'block';
-                errorElement.textContent = 'عذراً، يجب أن يكون عمر المشارك بين 18 و 45 عاماً.';
-                warningElement.style.display = 'none';
-                inputElement.classList.add('input-error');
-            } else {
-                errorElement.style.display = 'none';
-                warningElement.style.display = 'none';
-                inputElement.classList.remove('input-error');
+        function checkAge(participantIndex) {
+            const dobInput = document.getElementById(`p${participantIndex}_dob`);
+            const ageWarning = document.getElementById(`p${participantIndex}_ageWarning`);
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
             }
-            updateSubmitButtonState();
+
+            let message = '';
+            let isAgeValid = true;
+
+            if (age < MIN_AGE) {
+                message = `نعتذر، يجب أن يكون المشارك أكبر من ${MIN_AGE} عامًا.`;
+                isAgeValid = false;
+            } else if (age > MAX_AGE) {
+                message = `نعتذر، يجب أن يكون المشارك أصغر من ${MAX_AGE} عامًا.`;
+                isAgeValid = false;
+            }
+
+            if (!isAgeValid) {
+                ageWarning.style.display = 'block';
+                ageWarning.textContent = message;
+                dobInput.classList.add('input-error');
+            } else {
+                ageWarning.style.display = 'none';
+                ageWarning.textContent = '';
+                dobInput.classList.remove('input-error');
+            }
+            validateForm();
         }
 
         function calculateTotal() {
-            let participants = parseInt(numParticipantsInput.value);
-            if (isNaN(participants) || participants < 1) {
-                participants = 1;
-                numParticipantsInput.value = 1;
-            }
-
-            let currentTotal = pricePerPersonBase * participants;
+            const num = parseInt(numParticipantsInput.value);
+            let total = num * pricePerPersonBase;
             let discountAmount = 0;
-
-            groupDiscountRow.style.display = 'none';
-            friendDiscountRow.style.display = 'none';
-
-            if (participants >= 3) {
-                discountAmount = currentTotal * groupDiscountRate;
-                groupDiscountRow.style.display = 'flex';
-                groupDiscountAmount.textContent = `- ${discountAmount.toFixed(2)} ${currency}`;
-            } else if (participants === 2) {
-                discountAmount = currentTotal * friendDiscountRate;
-                friendDiscountRow.style.display = 'flex';
-                friendDiscountAmount.textContent = `- ${discountAmount.toFixed(2)} ${currency}`;
-            }
-
-            currentTotal -= discountAmount;
+            let discountApplied = false;
 
             pricePerPersonDisplay.textContent = `${pricePerPersonBase.toFixed(2)} ${currency}`;
-            participantsCountDisplay.textContent = participants;
-            totalAmountDisplay.textContent = `${currentTotal.toFixed(2)} ${currency}`;
+            participantsCountDisplay.textContent = num;
 
-            let totalHiddenInput = document.getElementById('totalPriceHidden');
-            if (!totalHiddenInput) {
-                totalHiddenInput = document.createElement('input');
-                totalHiddenInput.type = 'hidden';
-                totalHiddenInput.id = 'totalPriceHidden';
-                totalHiddenInput.name = 'totalPrice';
-                bookingForm.appendChild(totalHiddenInput);
+            // Reset discounts display
+            groupDiscountRow.style.display = 'none';
+            friendDiscountRow.style.display = 'none';
+            groupDiscountAmount.textContent = '';
+            friendDiscountAmount.textContent = '';
+
+            const selectedFriendshipType = num === 2 ? document.querySelector('input[name="friendshipType"]:checked')?.value : null;
+
+            if (num >= 3) { // Group discount
+                discountAmount = total * groupDiscountRate;
+                total -= discountAmount;
+                groupDiscountRow.style.display = 'flex';
+                groupDiscountAmount.textContent = `-${discountAmount.toFixed(2)} ${currency}`;
+                discountApplied = true;
+            } else if (num === 2) { // Friend or Couple discount
+                if (selectedFriendshipType === 'couple') {
+                    discountAmount = total * coupleDiscountRate;
+                    total -= discountAmount;
+                    friendDiscountRow.style.display = 'flex';
+                    friendDiscountAmount.textContent = `خصم الزوجين (${(coupleDiscountRate * 100).toFixed(0)}%): -${discountAmount.toFixed(2)} ${currency}`;
+                    discountApplied = true;
+                } else { // Default to friends if 'friends' selected or no specific type for 2 participants
+                    discountAmount = total * friendDiscountRate;
+                    total -= discountAmount;
+                    friendDiscountRow.style.display = 'flex';
+                    friendDiscountAmount.textContent = `خصم الأصدقاء (${(friendDiscountRate * 100).toFixed(0)}%): -${discountAmount.toFixed(2)} ${currency}`;
+                    discountApplied = true;
+                }
             }
-            totalHiddenInput.value = currentTotal.toFixed(2);
+            
+            currentTotalAmount = total;
+            totalAmountDisplay.textContent = `${total.toFixed(2)} ${currency}`;
+
+            // Update amounts in payment details sections
+            document.getElementById('paypalAmountDisplay').textContent = `${total.toFixed(2)} ${currency}`;
+            document.getElementById('bankTransferAmountDisplay').textContent = `${total.toFixed(2)} ${currency}`;
+            document.getElementById('cashAmountDisplay').textContent = `${total.toFixed(2)} ${currency}`;
+
+            if (selectedPaymentMethod === 'paypal' && typeof paypal !== 'undefined' && paypal.Buttons) {
+                renderPayPalButton(currentTotalAmount);
+            } else {
+                const paypalButtonContainer = document.getElementById('paypal-button-container');
+                if (paypalButtonContainer) paypalButtonContainer.innerHTML = '';
+            }
         }
 
-        function updateSubmitButtonState() {
-            let allFieldsValid = true;
-
-            const requiredContactInputs = ['fullName', 'email', 'phone'];
-            requiredContactInputs.forEach(id => {
-                const input = document.getElementById(id);
-                if (!input || !input.value.trim()) {
-                    allFieldsValid = false;
-                }
+        // Initialize form fields and total on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const campDateFormatted = new Date(CAMP_DATE).toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long', // 'long' for month name
+                day: 'numeric'
             });
+            document.getElementById('arrivalDate').textContent = campDateFormatted;
+            
+            const lastRegDateFormatted = new Date(LAST_REG_DATE).toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('registrationDeadline').textContent = lastRegDateFormatted;
 
-            if (!agreeTermsCheckbox.checked) {
-                allFieldsValid = false;
-            }
+            populateCountryCodes(); // Populate phone country codes
+            
+            generateParticipantFields(); // Generates participant fields and calls calculateTotal
+            updatePaymentMethods(); // Initial call to update payment methods based on default country code
+            validateForm(); // Initial form validation
+        });
 
-            const num = parseInt(numParticipantsInput.value);
-            for (let i = 0; i < num; i++) {
-                // Validate participant name
-                const nameInput = document.getElementById(`participantName${i}`);
-                if (!nameInput || !nameInput.value.trim()) {
-                    allFieldsValid = false;
-                }
+        numParticipantsInput.addEventListener('change', generateParticipantFields);
+        numParticipantsInput.addEventListener('input', generateParticipantFields);
 
-                // Validate participant age
-                const ageInput = document.getElementById(`participantAge${i}`);
-                if (!ageInput || isNaN(parseInt(ageInput.value)) || parseInt(ageInput.value) < 18 || parseInt(ageInput.value) > 45) {
-                    allFieldsValid = false;
-                }
+        agreeTermsCheckbox.addEventListener('change', validateForm);
+        bookingForm.addEventListener('input', validateForm); // Validate on any form input change
 
-                // Validate participant gender
-                const genderMale = document.getElementById(`participantGenderMale${i}`);
-                const genderFemale = document.getElementById(`participantGenderFemale${i}`);
-                if (!genderMale || !genderFemale || (!genderMale.checked && !genderFemale.checked)) {
-                    allFieldsValid = false;
-                }
+        // --- Phone Number Country Code Logic ---
+        function populateCountryCodes() {
+            countryCodes.sort((a, b) => a.name.localeCompare(b.name, 'ar')); // Sort by Arabic name
 
-                // Validate participant nationality
-                const nationalitySelect = document.getElementById(`nationality${i}`);
-                if (!nationalitySelect || !nationalitySelect.value) {
-                    allFieldsValid = false;
-                }
-            }
-
-            const today = new Date();
-            if (today > LAST_REG_DATE) {
-                allFieldsValid = false;
-                console.warn('عذراً، لقد انتهى موعد التسجيل للمخيم.');
-            }
-
-            submitBookingBtn.disabled = !allFieldsValid;
+            countryCodes.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.dial_code;
+                // Using img tag for flag, make sure you have the 'flags' folder with images
+                option.innerHTML = `<img src="${country.flag_img}" class="country-flag" alt="${country.name}"> ${country.name} (${country.dial_code})`;
+                countryCodeSelect.appendChild(option);
+            });
+            countryCodeSelect.value = "+90"; // Default to Turkey's dial code
+            phoneInput.placeholder = `ادخل الرقم بدون الرمز (+90)`; // Initial placeholder
         }
 
-        // Event listeners
-        numParticipantsInput.addEventListener('input', () => {
-            generateParticipantFields();
-            calculateTotal();
-            updateSubmitButtonState();
-        });
-
-        additionalParticipantsInfo.addEventListener('input', (event) => {
-            if (event.target.id.startsWith('participantAge')) {
-                validateAge(event.target);
+        countryCodeSelect.addEventListener('change', () => {
+            const selectedDialCode = countryCodeSelect.value;
+            const selectedCountry = countryCodes.find(c => c.dial_code === selectedDialCode);
+            if (selectedCountry) {
+                phoneInput.placeholder = `ادخل الرقم بدون الرمز (${selectedDialCode})`;
+            } else {
+                phoneInput.placeholder = "ادخل الرقم";
             }
-            updateSubmitButtonState(); // Call for any input change in participant fields
+            updatePaymentMethods(); // Call updatePaymentMethods when country code changes
         });
 
-        additionalParticipantsInfo.addEventListener('change', (event) => {
-            if (event.target.name.startsWith('participantGender') || event.target.id.startsWith('nationality')) {
-                 updateSubmitButtonState(); // Call for any change in participant fields (radio/select)
-            }
-        });
 
-        agreeTermsCheckbox.addEventListener('change', updateSubmitButtonState);
+        // --- Dynamic Payment Methods based on Dial Code ---
+        function updatePaymentMethods() {
+            const selectedDialCode = countryCodeSelect.value;
+            const availableMethods = paymentMethodsByDialCode[selectedDialCode] || paymentMethodsByDialCode['default'];
+            
+            paymentMethodsIconsContainer.innerHTML = ''; // Clear existing icons
+            selectedPaymentMethod = null; // Reset selected method
+            hideAllPaymentDetails(); // Hide all details when dial code changes
+            validateForm(); // Re-validate form
 
-        // Initial setup
-        generateParticipantFields();
-        calculateTotal();
-        updateSubmitButtonState();
-
-        // Add event listener for form submission to handle backend
-        bookingForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            updateSubmitButtonState();
-
-            if (submitBookingBtn.disabled) {
-                alert('الرجاء التأكد من تعبئة جميع الحقول المطلوبة والموافقة على الشروط والأحكام، وأن أعمار المشاركين ضمن النطاق المسموح به (18-45 عاماً).');
+            if (availableMethods.length === 0) {
+                paymentMethodsIconsContainer.innerHTML = '<p style="text-align: center; color: #dc3545;">لا تتوفر طرق دفع لهذا البلد حالياً.</p>';
                 return;
             }
 
-            const formData = new FormData(bookingForm);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
+            availableMethods.forEach(methodId => {
+                const methodInfo = paymentMethodDetails[methodId];
+                if (methodInfo) {
+                    const iconDiv = document.createElement('div');
+                    iconDiv.classList.add('payment-method-icon');
+                    iconDiv.setAttribute('data-method-id', methodId);
+                    
+                    let iconHtml;
+                    if (methodInfo.img_src) {
+                        iconHtml = `<img src="${methodInfo.img_src}" alt="${methodInfo.name}">`;
+                    } else {
+                        iconHtml = `<i class="${methodInfo.icon}"></i>`;
+                    }
+                    iconDiv.innerHTML = `${iconHtml}<span>${methodInfo.name}</span>`;
+                    paymentMethodsIconsContainer.appendChild(iconDiv);
+
+                    iconDiv.addEventListener('click', () => {
+                        selectPaymentMethod(methodId);
+                    });
+                }
+            });
+        }
+
+        function selectPaymentMethod(methodId) {
+            // Remove 'selected' class from all icons
+            document.querySelectorAll('.payment-method-icon').forEach(icon => {
+                icon.classList.remove('selected');
             });
 
-            data.participants = [];
-            const num = parseInt(data.numParticipants);
-            for (let i = 0; i < num; i++) {
-                const participantData = {
-                    name: data[`participantName${i}`],
-                    age: data[`participantAge${i}`],
-                    gender: data[`participantGender${i}`],
-                    nationality: data[`nationality${i}`]
-                };
-
-                // For couples (2 participants), override gender if needed
-                if (num === 2) {
-                    if (i === 0) participantData.gender = 'male';
-                    if (i === 1) participantData.gender = 'female';
-                }
-                data.participants.push(participantData);
-
-                // Clean up individual fields after grouping
-                delete data[`participantName${i}`];
-                delete data[`participantAge${i}`];
-                delete data[`participantGender${i}`];
-                delete data[`nationality${i}`];
+            // Add 'selected' class to the clicked icon
+            const clickedIcon = document.querySelector(`.payment-method-icon[data-method-id="${methodId}"]`);
+            if (clickedIcon) {
+                clickedIcon.classList.add('selected');
             }
 
-            try {
-                const response = await fetch(bookingForm.action, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
+            // Hide all payment details sections
+            hideAllPaymentDetails();
 
-                const result = await response.text();
-                if (response.ok) {
-                    alert('تم إرسال طلب الحجز بنجاح! يرجى التحقق من بريدك الإلكتروني لتأكيد الحجز، وسنتواصل معك قريباً لإتمام الدفع وتأكيد الحجز النهائي.');
-                    bookingForm.reset();
-                    generateParticipantFields();
-                    updateSubmitButtonState();
-                } else {
-                    alert(`خطأ في إرسال طلب الحجز: ${result}`);
+            // Show the selected payment method's details
+            const selectedSection = paymentMethodDetails[methodId].section;
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+                if (methodId === 'paypal') {
+                    if (typeof paypal !== 'undefined' && paypal.Buttons) {
+                        renderPayPalButton(currentTotalAmount);
+                    } else {
+                        console.warn('PayPal SDK not fully loaded. Cannot render buttons.');
+                    }
                 }
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('حدث خطأ أثناء إرسال طلب الحجز. يرجى المحاولة مرة أخرى لاحقاً.');
             }
+            selectedPaymentMethod = methodId; // Update global variable
+            validateForm(); // Re-validate to enable/disable buttons
+        }
+
+        function hideAllPaymentDetails() {
+            document.querySelectorAll('.payment-details-section').forEach(section => {
+                section.classList.remove('active');
+            });
+        }
+
+        // --- PayPal Integration ---
+        function renderPayPalButton(amount) {
+            const paypalButtonContainer = document.getElementById('paypal-button-container');
+            if (!paypalButtonContainer) {
+                console.error('عنصر PayPal button container غير موجود!');
+                return;
+            }
+            paypalButtonContainer.innerHTML = ''; // Clear any existing PayPal buttons
+
+            if (typeof paypal === 'undefined' || !paypal.Buttons) {
+                console.error('مكتبة PayPal SDK لم يتم تحميلها بالكامل أو paypal.Buttons غير متاح. تأكد من صحة Client ID.');
+                return;
+            }
+
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal',
+                },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: amount.toFixed(2),
+                                currency_code: currency
+                            },
+                            shipping_preference: 'NO_SHIPPING'
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(orderData) {
+                        alert('تم الدفع بنجاح عبر PayPal! معرف العملية: ' + orderData.id + '\n (ملاحظة: هذا يتطلب تأكيدًا من الخادم الخلفي لتأكيد الحجز).');
+                        
+                        const paypalPaymentInput = document.createElement('input');
+                        paypalPaymentInput.type = 'hidden';
+                        paypalPaymentInput.name = 'paymentMethod';
+                        paypalPaymentInput.value = 'PayPal';
+                        bookingForm.appendChild(paypalPaymentInput);
+
+                        const paypalTransactionIdInput = document.createElement('input');
+                        paypalTransactionIdInput.type = 'hidden';
+                        paypalTransactionIdInput.name = 'paypalTransactionId';
+                        paypalTransactionIdInput.value = orderData.id;
+                        bookingForm.appendChild(paypalTransactionIdInput);
+                        
+                        bookingForm.submit();
+                    });
+                },
+                onError: function(err) {
+                    console.error('خطأ في زر PayPal:', err);
+                    alert('حدث خطأ في عملية الدفع عبر PayPal. الرجاء المحاولة مرة أخرى.');
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // --- Event Listeners for payment buttons (Bank Transfer, Cash, Instapay, etc.) ---
+        document.getElementById('bankTransferBtn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Bank Transfer';
+            bookingForm.appendChild(paymentMethodInput);
+
+            alert('تم إرسال طلب الحجز بنجاح. يرجى إتمام التحويل البنكي وإرسال إثبات الدفع.');
+            bookingForm.submit();
         });
 
+        document.getElementById('cashPaymentBtn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Cash Payment';
+            bookingForm.appendChild(paymentMethodInput);
+
+            alert('تم إرسال طلب الحجز بنجاح. سيتم التواصل معك لترتيب الدفع النقدي.');
+            bookingForm.submit();
+        });
+
+        document.querySelector('.instapay-btn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Instapay';
+            bookingForm.appendChild(paymentMethodInput);
+            alert('تم إرسال طلب الحجز بنجاح. يرجى إتمام الدفع عبر Instapay ثم إرسال إثبات الدفع.');
+            bookingForm.submit();
+        });
+        document.querySelector('.vodafone-cash-btn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Vodafone Cash';
+            bookingForm.appendChild(paymentMethodInput);
+            alert('تم إرسال طلب الحجز بنجاح. يرجى إتمام الدفع عبر Vodafone Cash ثم إرسال إثبات الدفع.');
+            bookingForm.submit();
+        });
+        document.querySelector('.papara-btn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Papara';
+            bookingForm.appendChild(paymentMethodInput);
+            alert('تم إرسال طلب الحجز بنجاح. يرجى إتمام الدفع عبر Papara ثم إرسال إثبات الدفع.');
+            bookingForm.submit();
+        });
+        document.querySelector('.revolut-btn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Revolut';
+            bookingForm.appendChild(paymentMethodInput);
+            alert('تم إرسال طلب الحجز بنجاح. يرجى إتمام الدفع عبر Revolut ثم إرسال إثبات الدفع.');
+            bookingForm.submit();
+        });
+        document.querySelector('.option-btn')?.addEventListener('click', () => {
+            if (!validateAndAlertForm()) return;
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = 'Option';
+            bookingForm.appendChild(paymentMethodInput);
+            alert('تم إرسال طلب الحجز بنجاح. سيتم التواصل معك بخصوص خيارات الدفع.');
+            bookingForm.submit();
+        });
+
+        function validateAndAlertForm() {
+            if (!bookingForm.checkValidity()) {
+                alert('الرجاء ملء جميع الحقول المطلوبة بشكل صحيح قبل إرسال طلب الحجز.');
+                bookingForm.reportValidity();
+                return false;
+            }
+            if (!agreeTermsCheckbox.checked) {
+                alert('الرجاء الموافقة على الشروط والأحكام.');
+                return false;
+            }
+            if (document.querySelectorAll('.age-warning-message[style*="display: block"]').length > 0) {
+                alert('الرجاء تصحيح معلومات العمر للمشاركين. يجب أن يكون جميع المشاركين بين 18 و 45 عامًا.');
+                return false;
+            }
+            return true;
+        }
+
+        function validateForm() {
+            const isFormValid = bookingForm.checkValidity();
+            const hasAgeWarnings = document.querySelectorAll('.age-warning-message[style*="display: block"]').length > 0;
+            
+            submitBookingBtn.disabled = !(isFormValid && agreeTermsCheckbox.checked && !hasAgeWarnings && selectedPaymentMethod);
+
+            document.querySelectorAll('.booking-submit-btn').forEach(btn => {
+                if (btn.id !== 'submitBookingBtn') { // Exclude the main submit button
+                    const paymentType = btn.id.replace('Btn', '').replace('-btn', '');
+                    if (selectedPaymentMethod === paymentType) {
+                        btn.disabled = !(isFormValid && agreeTermsCheckbox.checked && !hasAgeWarnings);
+                    } else {
+                        btn.disabled = true; // Disable other payment buttons
+                    }
+                }
+            });
+        }
+        
+        bookingForm.addEventListener('submit', (event) => {
+            if (!selectedPaymentMethod || !agreeTermsCheckbox.checked || document.querySelectorAll('.age-warning-message[style*="display: block"]').length > 0) {
+                event.preventDefault();
+                if (!agreeTermsCheckbox.checked) {
+                    alert('الرجاء الموافقة على الشروط والأحكام.');
+                } else if (document.querySelectorAll('.age-warning-message[style*="display: block"]').length > 0) {
+                    alert('الرجاء تصحيح معلومات العمر للمشاركين. يجب أن يكون جميع المشاركين بين 18 و 45 عامًا.');
+                } else if (!selectedPaymentMethod) {
+                    alert('الرجاء اختيار طريقة دفع.');
+                }
+            }
+        });
     </script>
 </body>
 </html>
